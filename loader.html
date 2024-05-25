@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading Page</title>
+    <link rel="stylesheet" href="css/loader.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <p class="welcome">
+        <span class="animated-text" style="--delay: 0.5s">W</span>
+        <span class="animated-text" style="--delay: 1s">e</span>
+        <span class="animated-text" style="--delay: 1.5s">l</span>
+        <span class="animated-text" style="--delay: 2s">c</span>
+        <span class="animated-text" style="--delay: 2.5s">o</span>
+        <span class="animated-text" style="--delay: 3s">m</span>
+        <span class="animated-text" style="--delay: 3.5s">e</span>
+        <span>&nbsp;</span>
+        <!-- Spasi -->
+        <span class="animated-text" style="--delay: 4s">B</span>
+        <span class="animated-text" style="--delay: 4.5s">a</span>
+        <span class="animated-text" style="--delay: 5s">t</span>
+        <span class="animated-text" style="--delay: 5.5s">i</span>
+        <span class="animated-text" style="--delay: 6s">k</span>
+        <span class="animated-text" style="--delay: 6.5s">u</span>
+        <span class="animated-text" style="--delay: 7s">!</span>
+      </p>
+
+      <audio id="loadingSound" src="Loading-Sound.mp3" preload="auto"></audio>
+    </div>
+
+    <script>
+      // Fungsi untuk memainkan suara sesuai dengan waktu yang ditentukan
+      function playSound() {
+        var lastPlayTime = localStorage.getItem("lastPlayTime");
+        var currentTime = new Date().getTime();
+        var elapsedTime = currentTime - lastPlayTime;
+
+        if (elapsedTime >= 7000 || !lastPlayTime) {
+          localStorage.setItem("lastPlayTime", currentTime);
+        } else {
+          setTimeout(function () {
+            localStorage.setItem("lastPlayTime", new Date().getTime());
+          }, 7000 - elapsedTime);
+        }
+      }
+
+      // Jalankan fungsi playSound saat halaman dimuat
+      document.addEventListener("DOMContentLoaded", function () {
+        playSound();
+      });
+
+      // Fungsi untuk refresh halaman
+      function refreshPage() {
+        localStorage.setItem("lastPlayTime", new Date().getTime()); // Simpan waktu terakhir pemutaran suara
+        location.reload(); // Refresh halaman
+      }
+    </script>
+
+    <div class="loading-page">
+      <img src="img/Logo.jpg" alt="Logo" class="loader-logo" />
+    </div>
+  </body>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
+    integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="js/script.js"></script>
+</html>

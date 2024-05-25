@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            height: 200px;
+            width: 200px;
+            border: 2px black solid;
+        }
+    </style>
+</head>
+<body>
+    <label>Image Name</label>
+    <input type="text" id="namebox">
+
+    <label id="extlab"></label>
+    <br><br>
+
+    <img id="myimg"><label id="upprogress"></label>
+    <br><br>
+
+    <button id="selbtn">Select Image</button>
+    <button id="upbtn">Upload Image</button>
+    <button id="downbtn">Retrieve Image</button>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        import { getStorage, ref as Sref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
+        import {getDatabase, ref, child, get, set, update, remove} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBneLQmvFAj9El86CV_KLqOMk_pmOaNEfw",
+          authDomain: "batik-explorer.firebaseapp.com",
+          databaseURL: "https://batik-explorer-default-rtdb.firebaseio.com",
+          projectId: "batik-explorer",
+          storageBucket: "batik-explorer.appspot.com",
+          messagingSenderId: "1029742394869",
+          appId: "1:1029742394869:web:e9ff03187ee69975f3f4bc"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        var files = [];
+        var reader = new FileReader();
+
+        var namebox = document.getElementById('namebox');
+        var extlab = document.getElementById('extlab');
+        var myimg = document.getElementById('myimg');
+        var proglab = document.getElementById('upprogress');
+        var SelBtn = document.getElementById('selbtn');
+        var UpBtn = document.getElementById('upbtn');
+        var DownBtn = document.getElementById('downbtn');
+
+        var input = document.createElement('input');
+        input.type = 'file';
+
+        input.onchange = e => {
+            files = e.target.files;
+
+            var extension = GetFileExt(files[0]);
+            var name = GetFileName(files[0]);
+
+            namebox.value = name;
+            extlab.innerHTML = extension;
+
+            reader.readAsDataURL(files[0]);
+        }
+
+        reader.onload = function(){
+            myimg.src = reader.result;
+        }
+
+        SelBtn.onclick = function(){
+            input.click();
+        }
+
+        function GetFileExt(file){
+            var temp = file.name.split('.');
+            var ext = temp.slice((temp.length-1), (temp.length));
+            return '.' + ext[0];
+        }
+
+        function GetFileName(file) {
+            var temp = file.name.split('.')
+            var fname = temp.slice(0,-1).join('.');
+            return fname;
+        }
+
+        async function UploadProcess(){
+    var ImgToUpload = files[0]; // Perbaiki pemanggilan variabel menjadi files[0] daripada file[0]
+
+    var ImgName = namebox.value + extlab.innerHTML;
+
+    if(!ValidateName()){
+        alert('name cannot contain ".", "#", "$", "[", or "]"');
+        return;
+    }
+
+    const metaData = {
+        contentType: ImgToUpload.type
+    }
+
+    const storage = getStorage();
+    const storageRef = Sref(storage, "Images/" + ImgName);
+    const UploadTask = uploadBytesResumable(storageRef, ImgToUpload, metaData);
+
+    UploadTask.on('state_changed', 
+        (snapshot) => {
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            proglab.innerHTML = "Upload " + progress.toFixed(2) + "%";
+        }, 
+        (error) => {
+            alert("Error: Image not uploaded!");
+            console.error(error);
+        }, 
+        () => {
+            getDownloadURL(UploadTask.snapshot.ref)
+            .then((downloadURL)=> {
+                console.log(downloadURL);
+                SaveURLtoRealTimDB(downloadURL); // Save URL to Realtime DB
+            })
+            .catch((error) => {
+                alert("Error: Failed to retrieve download URL!");
+                console.error(error);
+            });
+        }
+    );
+}
+
+// Definisikan referensi ke database Firebase
+const realdb = getDatabase();
+
+function SaveURLtoRealTimDB(URL){
+    var name = namebox.value;
+    var ext = extlab.innerHTML;
+
+    set(ref(realdb, "ImagesLinks/" + name), {
+        ImageName: (name+ext),
+        ImgUrl: URL
+    }).then(() => {
+        console.log("Image URL saved to Realtime DB");
+    }).catch((error) => {
+        alert("Error: Failed to save image URL to Realtime DB!");
+        console.error(error);
+    });
+}
+
+        function GetUrlfromRealtimDB(){
+            var name = namebox.value;
+            var dbRef = ref(realdb);
+
+            get(child(dbRef, "ImagesLinks/" + name)).then((snapshot)=> {
+                if(snapshot.exists()){
+                    myimg.src = snapshot.val().ImgUrl;
+                }
+            })
+        }
+
+        function ValidateName() {
+            var regex = /[\.#$\[\]]/
+            return !(regex.test(namebox.value));
+        }
+
+        UpBtn.onclick = UploadProcess;
+        DownBtn.onclick = GetUrlfromRealtimDB;
+      </script>
+</body>
+</html>

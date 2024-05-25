@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./dist/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <title>HOME | Landing Page</title>
+  </head>
+  <body id="home">
+    <!-- navigation -->
+    <header>
+      <section class="navigation">
+        <div class="container">
+          <div class="box-navigation animate_animated animate_fadeInUp">
+            <div class="box">
+              <img
+                src="./image/Logo-noBG.png"
+                alt="Logo"
+                class="logo"
+                style="width: 80px; height: auto"
+              />
+            </div>
+            <div class="box menu-navigation">
+              <ul>
+                <li>
+                  <i class="ri-home-2-line"></i>
+                  <a href="#home">Home</a>
+                </li>
+                <li>
+                  <i class="ri-information-line"></i>
+                  <a href="#about">About</a>
+                </li>
+                <li>
+                  <i class="ri-login-circle-line"></i>
+                  <a href="loader.html">Login</a>
+                </li>
+              </ul>
+            </div>
+            <div class="box menu-bar">
+              <i class="ri-menu-fill" style="color: white"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- navigation -->
+
+      <!-- hero -->
+      <section class="hero">
+        <h1 class="animate_animated animate_fadeInUp">
+          Pesona Batik Indonesia
+        </h1>
+      </section>
+
+      <!-- hero -->
+    </header>
+
+    <section class="about" id="about">
+      <div class="container">
+        <div class="box-about">
+          <div
+            class="box text-box"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+          >
+            <h1 id="text1">Batik Parang</h1>
+            <p id="paragraph1">
+              Motif "S" pada batik Parang mencerminkan keselarasan vertikal,
+              terinspirasi dari ombak laut yang abadi. Penyatuan huruf-huruf
+              tersebut mengekspresikan kontinuitas, baik dalam perjuangan,
+              ikatan persaudaraan, maupun pertumbuhan pribadi. Filosofi batik
+              Parang yang kaya bermula dari zaman Keraton Kuno dan menjadi motif
+              tertua dalam dunia batik.
+            </p>
+          </div>
+
+          <div
+            class="box image-box"
+            data-aos="fade-left"
+            data-aos-duration="1000"
+          >
+            <img src="./image/1.jpg" alt="" id="image1" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer>
+      <p>&copy; 2024 by Group 10</p>
+    </footer>
+    <!-- footer -->
+
+    <script src="./dist/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>

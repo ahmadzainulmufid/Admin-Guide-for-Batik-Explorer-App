@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+main {
+    position: relative;
+    width: calc(min(90rem, 90%));
+    margin: 0 auto;
+    min-height: 100vh;
+    column-gap: 3rem;
+    padding-block: min(20vh, 3rem);
+}
+
+main > div span {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 1rem;
+    color: #717171;
+}
+
+main > div h1 {
+    text-transform: uppercase;
+    letter-spacing: 0.08px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-size: clamp(3.4375rem, 3.25rem + 0.74vw, 4rem);
+    background-color: #005baa;
+    background-image: linear-gradient(45deg, #005baa, #000000);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+main > div hr {
+    display: block;
+    background-color: #005baa;
+    height: 0.25rem;
+    width: 6.25rem;
+    border: none;
+    margin: 1.125rem 0 1.875rem 0;
+}
+
+main > div p {
+    line-height: 1.6;
+}
+
+main > div a {
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #717171;
+    font-weight: 500;
+    border-radius: 3.125rem;
+    border: 2px solid #c2c2c2; /* Updated color */
+    margin-top: 2.188rem;
+    padding: 0.625rem 1.875rem;
+    transition: border-color 0.3s ease; /* Transition effect for border color */
+}
+
+main > div a:hover {
+    border-color: #005baa; /* Color change on hover */
+    color: #005baa; /* Text color change on hover */
+}
+
+.swiper {
+    width: 100%;
+    padding-top: 3.125rem;
+}
+
+.swiper-wrapper {
+    display: flex;
+    justify-content: space-between; /* Membuat gambar sejajar dan memberikan ruang di antara mereka */
+}
+
+.swiper-slide {
+    flex: 1 0 auto; /* Membuat slide dapat menyesuaikan lebar */
+    margin-right: 20px; /* Memberikan jarak antara slide */
+}
+
+
+.swiper-slide {
+    width: 18.75rem;
+    height: 28.125rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    border-radius: 5px;
+}
+
+.swiper-slide h2 {
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    margin-bottom: 0.625rem;
+    padding-left: 1.563rem;
+    text-transform: uppercase;
+}
+
+.swiper-slide p {
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    padding: 0 1.563rem;
+    line-height: 1.6;
+    font-size: 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 70px;
+}
+
+.swiper-slide a {
+    margin: 1.25rem 1.563rem 3.483rem 1.563rem;
+    padding: 0.438rem 1.85rem;
+    font-size: 0.9rem;
+    background-color: #fff;
+    color: #005baa;
+    border: none;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.swiper-slide a:hover {
+    background-color: #D3AA82;
+    color: #fff;
+}
+
+.slide-1 {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url("https://asset.kompas.com/crops/tmDvaNLzsbMqcpmB6HTaUdQL3MY=/0x35:1000x535/1200x800/data/photo/2019/05/31/876893028.jpg") no-repeat 50% 50%/cover;
+}
+
+.slide-2 {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url("https://webicdn.com/sdirmember/9/8681/produk/ncgyw.jpg") no-repeat 50% 50%/cover;
+}
+
+.slide-3 {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url("https://www.jnjbatik.com/wp-content/uploads/2016/11/Sedikit-Hal-Tentang-Batik-Kombinasi.jpg") no-repeat 50% 50%/cover;
+}
+.slide-4 {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400), url("https://wonderfulimage.s3-id-jkt-1.kilatstorage.id/1686558141-photo-2023-05-28-11-06-52-jpg-medium.jpg") no-repeat 50% 50%/cover;
+}
+
+/* Untuk tampilan yang lebih kecil dari 768px */
+@media screen and (max-width: 767px) {
+    main {
+        padding-block: 10vh;
+    }
+
+    main > div h1 {
+        font-size: 3rem;
+    }
+
+    .swiper-slide {
+        width: calc(50% - 10px); /* 2 slide per baris */
+        margin-right: 10px;
+    }
+}
+
+/* Untuk tampilan yang lebih kecil dari 480px */
+@media screen and (max-width: 479px) {
+    main {
+        padding-block: 5vh;
+    }
+
+    main > div h1 {
+        font-size: 2.5rem;
+    }
+
+    .swiper-slide {
+        width: 100%; /* 1 slide per baris */
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+/* Untuk tampilan yang lebih kecil dari 768px */
+@media screen and (max-width: 470px) {
+    main {
+        padding-block: 1vh;
+    }
+
+    main > div h1 {
+        font-size: 3rem;
+    }
+
+    .swiper-slide {
+        width: calc(0% - 10px); /* 2 slide per baris */
+        margin-right: 10px;
+    }
+}
+
+/* Untuk tampilan yang lebih kecil dari 768px */
+@media screen and (max-width: 460px) {
+    main {
+        padding-block: 1vh;
+    }
+
+    main > div h1 {
+        font-size: 3rem;
+    }
+
+    .swiper-slide {
+        width: calc(0% - 10px); /* 2 slide per baris */
+        margin-right: 10px;
+    }
+}
+
+/* Untuk tampilan yang lebih kecil dari 768px */
+@media screen and (max-width: 375px) {
+    main {
+        padding-block: 1vh;
+    }
+
+    main > div h1 {
+        font-size: 3rem;
+    }
+
+    .swiper-slide {
+        width: calc(0% - 10px); /* 2 slide per baris */
+        margin-right: 10px;
+    }
+}
